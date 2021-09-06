@@ -4,10 +4,8 @@ var userClickedPattern = [];
 var started = false;
 var level = 0;
 
-//$(document).one("keypress", function(event){
-$(document).keypress(function(event){
-
-    // Check if keypress is first
+// Start game by key press
+$(document).keypress((event) => {
 
     if (!started){
         
@@ -21,35 +19,40 @@ $(document).keypress(function(event){
 
 });
 
-
+// Generated Sequence
 function nextSequence(level){
     
-    // Generate Sequence
-
+    // Set Level
     level += 1;
     $("#level-title").text("Level " + level);
 
+    // Generate Sequence
     var randomNumber = Math.floor(Math.random() * 4);
     randomChosenColour = buttonColours[randomNumber];
     gamePattern.push(randomChosenColour);
     console.log("=== Start Level: " + level + " ===");
     console.log("Game pattern: " + gamePattern);
 
-    $("#" + randomChosenColour).fadeOut(100).fadeIn(100);
-    playSound(randomChosenColour)
+    // Blink sequence for user learn
+    gamePattern.forEach ((element, i) => {
+        setTimeout(() => {
+            $("#" + element).fadeOut(100).fadeIn(100);
+            playSound(element);
+        }, i * 500);
+    });
 
 }
 
-
 // User Sequence
-
-$(".btn").click(function(){
+$(".btn").click((event) => {
     
-    var userChoosenColour = this.id;
+    var userChoosenColour = event.target.id;
     userClickedPattern.push(userChoosenColour);
-    //console.log("User Pattern: " + userClickedPattern);
-    playSound(this.id);
-    animatePress(this.id);
+    
+    console.log("User Pattern: " + userClickedPattern);
+    
+    playSound(event.target.id);
+    animatePress(event.target.id);
 
     checkAnswer( userClickedPattern.length );
 });
@@ -64,15 +67,15 @@ function playSound(name){
 function animatePress(currentColour){
 
     $(".btn#" + currentColour).addClass("pressed")
-    setTimeout(function (){$(".btn#" + currentColour).removeClass("pressed")} ,100);
+    setTimeout(() => {
+        $(".btn#" + currentColour).removeClass("pressed")
+    } ,100);
 
 }
 
 // Check answer
 
 function checkAnswer(currentLevel){
-    //console.log("Received level - userClickedPattern last index: " + currentLevel)
-    //console.log("Game Pattern lengh: " + gamePattern.length)
 
     // Check if last user input same as expected
 
@@ -88,7 +91,7 @@ function checkAnswer(currentLevel){
             userClickedPattern = [];
             
             // delay 2 sec and launch next level
-            setTimeout(function (){
+            setTimeout(() => {
                 nextSequence(currentLevel);
             }, 2000);
 
@@ -104,9 +107,10 @@ function checkAnswer(currentLevel){
         playSound("wrong");
         $("body").addClass("game-over");
         
-        setTimeout(function (){
+        setTimeout(() => {
             $("body").removeClass("game-over");
         }, 100);
+        
         $("h1").text("Game Over, Press Any Key to Restart");
         
         startOver();
@@ -115,7 +119,7 @@ function checkAnswer(currentLevel){
     
 }
 
-
+// Reset all variables
 function startOver(){
     level = 0;
     gamePattern = [];
