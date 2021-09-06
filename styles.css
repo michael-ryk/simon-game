@@ -11,14 +11,16 @@ body {
 }
 
 .container {
-  display: block;
-  width: 25%;
-  margin: auto;
+  display: inline-grid;
+  grid-template-columns: 210px 210px;
+  grid-template-rows: 210px 210px;
+  column-gap: 1em;
+  row-gap: 1em;
 }
 
 .btn {
-  margin: 5px;
-  display: inline-block;
+  align-self: center;
+  justify-self: center;
   height: 200px;
   width: 200px;
   border: 2px solid black;
