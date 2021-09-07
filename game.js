@@ -94,6 +94,9 @@ function checkAnswer(currentLevel){
     // Check if last user input same as expected
     if (gamePattern[userClickedPattern.length - 1] == userClickedPattern[userClickedPattern.length - 1]){
     
+        score = score + 1000;
+        console.log("Score : " + score);
+
         // if user pattern = game pattern
         if (gamePattern.length == userClickedPattern.length){
 
@@ -111,7 +114,8 @@ function checkAnswer(currentLevel){
         console.log("Game over");
         playSound("wrong");
         $("body").addClass("game-over");
-        $("h1").text("Game Over");
+        $("h1").text("Game Over - Double click to restart");
+        $("h2").text("Your Current Score is : " + score);
         
         setTimeout(() => {
             $("body").removeClass("game-over");
