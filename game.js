@@ -1,22 +1,32 @@
+// Define variables
 var buttonColours = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickedPattern = [];
 var started = false;
 var level = 0;
+var score = 0;
 
-// Start game by click or touch
-$(document).click((event) => {
-
+// Start game on PC by clicking
+$(document).dblclick(() => {
     if (!started){
-    
-        // Start Game
+        // console.log("Double click detected");
         $("#level-title").text("Level " + 0);
         nextSequence(0);
         started = true;
-        
-    } 
-
+    }
 });
+
+// Start game on mobile by touching
+$(document).on("tap",() => {
+    if (!started){
+        console.log("tap detected");
+        
+        $("#level-title").text("Level " + 0);
+        nextSequence(0);
+        started = true;
+    }
+});
+
 
 // Generated Sequence
 function nextSequence(level){
@@ -42,6 +52,7 @@ function nextSequence(level){
 
 }
 
+
 // User Sequence
 $(".btn").click((event) => {
     
@@ -56,7 +67,7 @@ $(".btn").click((event) => {
         playSound(event.target.id);
         animatePress(event.target.id);
     
-        checkAnswer( userClickedPattern.length );
+        checkAnswer(userClickedPattern.length);
     }
 
 });
@@ -78,47 +89,36 @@ function animatePress(currentColour){
 }
 
 // Check answer
-
 function checkAnswer(currentLevel){
 
     // Check if last user input same as expected
-
     if (gamePattern[userClickedPattern.length - 1] == userClickedPattern[userClickedPattern.length - 1]){
     
-        //console.log("Element correct");
-
         // if user pattern = game pattern
-
         if (gamePattern.length == userClickedPattern.length){
 
-            console.log("Level Completed !");
+            console.log("Sequence Complete");
             userClickedPattern = [];
             
             // delay 2 sec and launch next level
             setTimeout(() => {
                 nextSequence(currentLevel);
             }, 2000);
-
-        } else {
-
-            console.log("Last Element correct but sequence not finished yet");
-
         }
-    
     } else {
 
+        // Wrong answer
         console.log("Game over");
         playSound("wrong");
         $("body").addClass("game-over");
+        $("h1").text("Game Over");
         
         setTimeout(() => {
             $("body").removeClass("game-over");
-        }, 100);
-        
-        $("h1").text("Game Over, Press Any Key to Restart");
+        }, 200);
         
         startOver();
-
+    
     }
     
 }
