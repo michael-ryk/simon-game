@@ -2,6 +2,7 @@
 var buttonColours = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickedPattern = [];
+var scoreArray = [];
 var started = false;
 var level = 0;
 var score = 0;
@@ -115,7 +116,15 @@ function checkAnswer(currentLevel){
         playSound("wrong");
         $("body").addClass("game-over");
         $("h1").text("Game Over - Double click to restart");
-        $("h2").text("Your Current Score is : " + score);
+        scoreArray.push(score);
+        $("h2").text("Your Last Score is : " + score);
+
+        $.each(scoreArray,(i, item) => {
+            $("#arrData").append(i + " : " + item + "<br/>");	  
+          });
+
+        console.log("Score Array : " + scoreArray);
+        
         
         setTimeout(() => {
             $("body").removeClass("game-over");
