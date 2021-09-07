@@ -4,8 +4,8 @@ var userClickedPattern = [];
 var started = false;
 var level = 0;
 
-// Start game by key press
-$(document).keypress((event) => {
+// Start game by click or touch
+$(document).keypress(() => {
 
     if (!started){
         
@@ -46,15 +46,20 @@ function nextSequence(level){
 // User Sequence
 $(".btn").click((event) => {
     
-    var userChoosenColour = event.target.id;
-    userClickedPattern.push(userChoosenColour);
+    // Check if game started
+    if (started){
+        
+        var userChoosenColour = event.target.id;
+        userClickedPattern.push(userChoosenColour);
+        
+        console.log("User Pattern: " + userClickedPattern);
+        
+        playSound(event.target.id);
+        animatePress(event.target.id);
     
-    console.log("User Pattern: " + userClickedPattern);
-    
-    playSound(event.target.id);
-    animatePress(event.target.id);
+        checkAnswer( userClickedPattern.length );
+    }
 
-    checkAnswer( userClickedPattern.length );
 });
 
 
