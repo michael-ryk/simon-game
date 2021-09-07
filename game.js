@@ -5,17 +5,16 @@ var started = false;
 var level = 0;
 
 // Start game by click or touch
-$(document).keypress(() => {
+$(document).click((event) => {
 
     if (!started){
-        
-        // Game started
-
+    
+        // Start Game
         $("#level-title").text("Level " + 0);
         nextSequence(0);
-
         started = true;
-    }
+        
+    } 
 
 });
 
