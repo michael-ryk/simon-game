@@ -10,7 +10,6 @@ var score = 0;
 // Start game on PC by clicking
 $(document).dblclick(() => {
     if (!started){
-        // console.log("Double click detected");
         $("#level-title").text("Level " + 0);
         nextSequence(0);
         started = true;
@@ -40,8 +39,8 @@ function nextSequence(level){
     var randomNumber = Math.floor(Math.random() * 4);
     randomChosenColour = buttonColours[randomNumber];
     gamePattern.push(randomChosenColour);
-    console.log("=== Start Level: " + level + " ===");
-    console.log("Game pattern: " + gamePattern);
+    // console.log("=== Start Level: " + level + " ===");
+    // console.log("Game pattern: " + gamePattern);
 
     // Blink sequence for user learn
     gamePattern.forEach ((element, i) => {
@@ -63,7 +62,7 @@ $(".btn").click((event) => {
         var userChoosenColour = event.target.id;
         userClickedPattern.push(userChoosenColour);
         
-        console.log("User Pattern: " + userClickedPattern);
+        // console.log("User Pattern: " + userClickedPattern);
         
         playSound(event.target.id);
         animatePress(event.target.id);
@@ -96,12 +95,12 @@ function checkAnswer(currentLevel){
     if (gamePattern[userClickedPattern.length - 1] == userClickedPattern[userClickedPattern.length - 1]){
     
         score = score + 1000;
-        console.log("Score : " + score);
+        // console.log("Score : " + score);
 
         // if user pattern = game pattern
         if (gamePattern.length == userClickedPattern.length){
 
-            console.log("Sequence Complete");
+            // console.log("Sequence Complete");
             userClickedPattern = [];
             
             // delay 2 sec and launch next level
@@ -112,7 +111,7 @@ function checkAnswer(currentLevel){
     } else {
 
         // Wrong answer
-        console.log("Game over");
+        // console.log("Game over");
         playSound("wrong");
         $("body").addClass("game-over");
         $("h1").text("Game Over - Double click to restart");
@@ -121,11 +120,8 @@ function checkAnswer(currentLevel){
 
         $("#arrData").prepend(score + "<br/>");
 
-        // $.each(scoreArray,(i, item) => {
-        //     $("#arrData").append(i + " : " + item + "<br/>");
-        //   });
 
-        console.log("Score Array : " + scoreArray);
+        // console.log("Score Array : " + scoreArray);
         
         
         setTimeout(() => {
