@@ -59,7 +59,7 @@ body {
 }
 
 /* For mobile phones */
-@media only screen and (max-width: 900px) {
+@media (max-width: 1200px) {
   .container {
     grid-template-columns: 40vw 40vw;
     grid-template-rows: 40vw 40vw;

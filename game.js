@@ -17,9 +17,10 @@ $(document).dblclick(() => {
 });
 
 // Start game on mobile by touching
-$(document).on("tap",() => {
+$("h1").on("tap",() => {
+    console.log("tap detected");
     if (!started){
-        console.log("tap detected");
+        console.log("tap + start false");
         
         $("#level-title").text("Level " + 0);
         nextSequence(0);
