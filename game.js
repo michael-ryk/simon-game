@@ -2,26 +2,13 @@
 var buttonColours = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickedPattern = [];
-var scoreArray = [];
 var started = false;
 var level = 0;
 var score = 0;
 
-// Start game on PC by clicking
-$(document).dblclick(() => {
+// Start game
+$("#startButton").click(() => {
     if (!started){
-        $("#level-title").text("Level " + 0);
-        nextSequence(0);
-        started = true;
-    }
-});
-
-// Start game on mobile by touching
-$("h1").on("tap",() => {
-    console.log("tap detected");
-    if (!started){
-        console.log("tap + start false");
-        
         $("#level-title").text("Level " + 0);
         nextSequence(0);
         started = true;
@@ -115,15 +102,12 @@ function checkAnswer(currentLevel){
         // console.log("Game over");
         playSound("wrong");
         $("body").addClass("game-over");
-        $("h1").text("Game Over - Double click to restart");
-        scoreArray.push(score);
-        $("h2").text("Your Last Score is : " + score);
+        $("#level-title").text("Game Over - Double click to restart");
+        $("#score-title").text("Your Last Score is : " + score);
 
         $("#arrData").prepend(score + "<br/>");
 
-
         // console.log("Score Array : " + scoreArray);
-        
         
         setTimeout(() => {
             $("body").removeClass("game-over");

@@ -5,6 +5,10 @@ body {
   color: #4C53FD;
 }
 
+#control {
+  margin:  2%;
+}
+
 #level-title {
   font-size: 3rem;
   margin:  5%;
@@ -20,6 +24,13 @@ body {
   grid-template-rows: 210px 210px;
   column-gap: 1em;
   row-gap: 1em;
+}
+
+#startButton {
+  border: 2px solid black;
+  color: #4C53FD;
+  font-family: 'calibri, arial, sans-serif', cursive;
+  font-size: 1rem;
 }
 
 .btn {
