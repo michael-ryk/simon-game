@@ -119,9 +119,11 @@ function checkAnswer(currentLevel){
         scoreArray.push(score);
         $("h2").text("Your Last Score is : " + score);
 
-        $.each(scoreArray,(i, item) => {
-            $("#arrData").append(i + " : " + item + "<br/>");	  
-          });
+        $("#arrData").prepend(score + "<br/>");
+
+        // $.each(scoreArray,(i, item) => {
+        //     $("#arrData").append(i + " : " + item + "<br/>");
+        //   });
 
         console.log("Score Array : " + scoreArray);
         
